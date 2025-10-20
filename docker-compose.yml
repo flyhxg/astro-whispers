@@ -1,0 +1,33 @@
+version: '3.9'
+services:
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: astro_whispers
+      POSTGRES_USER: astro
+      POSTGRES_PASSWORD: astro
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+
+  backend:
+    build: ./backend
+    environment:
+      DATABASE_URL: postgresql+psycopg2://astro:astro@db:5432/astro_whispers
+      SECRET_KEY: super-secret-key
+    depends_on:
+      - db
+    ports:
+      - "8001:8001"
+
+  frontend:
+    build: ./frontend
+    depends_on:
+      - backend
+    ports:
+      - "4173:80"
+
+volumes:
+  db_data:
+
