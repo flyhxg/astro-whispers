@@ -21,7 +21,12 @@ def create_astrology_report(report_type: str = 'daily', db: Session = Depends(ge
         rising='双子座 11°'
     )
 
-    report = models.AstrologyReport(user_id=current_user.id, report_type=report_type, payload=payload.model_dump())
+    report_payload = payload.model_dump(mode='json')
+    report = models.AstrologyReport(
+        user_id=current_user.id,
+        report_type=report_type,
+        payload=report_payload,
+    )
     db.add(report)
     db.commit()
     db.refresh(report)
@@ -35,7 +40,12 @@ def create_zodiac_report(db: Session = Depends(get_db), current_user=Depends(get
     element = five_element_by_year(current_user.birth_date.year)
     payload = generate_zodiac_report(zodiac=zodiac, element=element, year=year)
 
-    report = models.ZodiacReport(user_id=current_user.id, year=year, payload=payload.model_dump())
+    report_payload = payload.model_dump(mode='json')
+    report = models.ZodiacReport(
+        user_id=current_user.id,
+        year=year,
+        payload=report_payload,
+    )
     db.add(report)
     db.commit()
     db.refresh(report)
