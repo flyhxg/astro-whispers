@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
 type RegisterForm = {
@@ -13,9 +13,16 @@ type RegisterForm = {
 }
 
 export default function RegisterPage() {
-  const { register: registerUser } = useAuth()
+  const navigate = useNavigate()
+  const { register: registerUser, user, loading } = useAuth()
   const { register, handleSubmit, formState } = useForm<RegisterForm>()
   const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (!loading && user) {
+      navigate('/dashboard', { replace: true })
+    }
+  }, [loading, navigate, user])
 
   const onSubmit = async (data: RegisterForm) => {
     setError(null)
