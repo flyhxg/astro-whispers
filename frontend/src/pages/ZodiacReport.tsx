@@ -16,7 +16,7 @@ export default function ZodiacReportPage() {
       return res.data as ZodiacReportRecord[]
     },
     enabled: !!user,
-    onError: () => setMessage('Failed to load zodiac history. Please try again later.'),
+    onError: () => setMessage('载入生肖历史记录失败，请稍后再试。'),
   })
 
   const { mutate, isPending } = useMutation({
@@ -29,7 +29,7 @@ export default function ZodiacReportPage() {
       historyQuery.refetch()
       setMessage(null)
     },
-    onError: () => setMessage('Failed to generate the zodiac report. Please retry.'),
+    onError: () => setMessage('生成生肖报告失败，请重新尝试。'),
   })
 
   useEffect(() => {
@@ -46,18 +46,18 @@ export default function ZodiacReportPage() {
   return (
     <div className="mx-auto max-w-4xl space-y-10">
       <header className="space-y-4 text-center">
-        <p className="text-sm uppercase tracking-[0.4em] text-white/50">Zodiac Report</p>
-        <h2 className="font-serif text-4xl text-white">Annual zodiac energy overview</h2>
-        <p className="text-sm text-white/60">A blended reading of Chinese zodiac symbolism and five-element balance for the current year.</p>
+        <p className="text-sm uppercase tracking-[0.4em] text-white/50">生肖报告</p>
+        <h2 className="font-serif text-4xl text-white">年度生肖能量全景</h2>
+        <p className="text-sm text-white/60">融合生肖象征、流年太岁与纳音五行，为你描绘这一年的节奏与行动重点。</p>
         {report && (
           <div className="flex flex-wrap justify-center gap-3 text-sm text-white/70">
-            <span className="rounded-full border border-white/10 px-4 py-2">Zodiac: {report.payload.zodiac}</span>
-            <span className="rounded-full border border-white/10 px-4 py-2">Dominant element: {report.payload.element}</span>
-            <span className="rounded-full border border-white/10 px-4 py-2">Year: {report.payload.year}</span>
+            <span className="rounded-full border border-white/10 px-4 py-2">生肖：{report.payload.zodiac}</span>
+            <span className="rounded-full border border-white/10 px-4 py-2">主导五行：{report.payload.element}</span>
+            <span className="rounded-full border border-white/10 px-4 py-2">年份：{report.payload.year}</span>
           </div>
         )}
         {report && (
-          <p className="text-xs text-white/40">Generated at {new Date(report.payload.generated_at).toLocaleString()}</p>
+          <p className="text-xs text-white/40">生成时间：{new Date(report.payload.generated_at).toLocaleString()}</p>
         )}
         <div className="flex justify-center gap-3 text-xs text-white/50">
           <button
@@ -66,18 +66,18 @@ export default function ZodiacReportPage() {
             onClick={() => mutate()}
             disabled={isPending || !user}
           >
-            {isPending ? 'Generating…' : 'Generate latest zodiac report'}
+            {isPending ? '生成中…' : '刷新最新生肖报告'}
           </button>
-          {historyQuery.isFetching && <span className="px-4 py-2">Loading history…</span>}
+          {historyQuery.isFetching && <span className="px-4 py-2">加载历史记录…</span>}
         </div>
       </header>
 
       {!user && !loading && (
-        <div className="glass-card p-6 text-center text-white/60">Sign in to explore your zodiac and five-element insights.</div>
+        <div className="glass-card p-6 text-center text-white/60">登录后即可查看生肖运势与五行调频指引。</div>
       )}
 
       {user && !report && (
-        <div className="glass-card p-6 text-center text-white/60">Preparing this year&apos;s zodiac overview…</div>
+        <div className="glass-card p-6 text-center text-white/60">正在准备本年度的生肖概览…</div>
       )}
 
       {message && <div className="glass-card p-4 text-center text-aurora">{message}</div>}

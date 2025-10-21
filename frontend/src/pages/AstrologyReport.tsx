@@ -16,7 +16,7 @@ export default function AstrologyReportPage() {
       return res.data as AstrologyReportRecord[]
     },
     enabled: !!user,
-    onError: () => setMessage('Failed to load previous reports. Please try again later.'),
+    onError: () => setMessage('载入历史报告失败，请稍后再试。'),
   })
 
   const { mutate, isPending } = useMutation({
@@ -29,7 +29,7 @@ export default function AstrologyReportPage() {
       historyQuery.refetch()
       setMessage(null)
     },
-    onError: () => setMessage('Failed to generate the report. Please retry.'),
+    onError: () => setMessage('生成报告失败，请重新尝试。'),
   })
 
   useEffect(() => {
@@ -46,18 +46,18 @@ export default function AstrologyReportPage() {
   return (
     <div className="mx-auto max-w-4xl space-y-10">
       <header className="space-y-4 text-center">
-        <p className="text-sm uppercase tracking-[0.4em] text-white/50">Astrology Report</p>
-        <h2 className="font-serif text-4xl text-white">Your personalised cosmic briefing</h2>
+        <p className="text-sm uppercase tracking-[0.4em] text-white/50">星座报告</p>
+        <h2 className="font-serif text-4xl text-white">你的专属星座运势简报</h2>
         <p className="text-sm text-white/60">
-          Generated from your birth details. Refresh the report at any time to receive an updated cosmic insight.
+          根据你的出生信息实时生成，可随时刷新以获得最新的星象提示与能量流向建议。
         </p>
         <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-white/50">
-          <span className="rounded-full border border-white/10 px-4 py-2">Sun: {report?.payload.sun ?? '--'}</span>
-          <span className="rounded-full border border-white/10 px-4 py-2">Moon: {report?.payload.moon ?? '--'}</span>
-          <span className="rounded-full border border-white/10 px-4 py-2">Rising: {report?.payload.rising ?? '--'}</span>
+          <span className="rounded-full border border-white/10 px-4 py-2">太阳星座：{report?.payload.sun ?? '--'}</span>
+          <span className="rounded-full border border-white/10 px-4 py-2">月亮星座：{report?.payload.moon ?? '--'}</span>
+          <span className="rounded-full border border-white/10 px-4 py-2">上升星座：{report?.payload.rising ?? '--'}</span>
         </div>
         {report && (
-          <p className="text-xs text-white/40">Generated at {new Date(report.payload.generated_at).toLocaleString()}</p>
+          <p className="text-xs text-white/40">生成时间：{new Date(report.payload.generated_at).toLocaleString()}</p>
         )}
         <div className="flex justify-center gap-3 text-xs text-white/50">
           <button
@@ -66,18 +66,18 @@ export default function AstrologyReportPage() {
             onClick={() => mutate()}
             disabled={isPending || !user}
           >
-            {isPending ? 'Generating…' : 'Generate latest report'}
+            {isPending ? '生成中…' : '刷新最新报告'}
           </button>
-          {historyQuery.isFetching && <span className="px-4 py-2">Loading history…</span>}
+          {historyQuery.isFetching && <span className="px-4 py-2">加载历史记录…</span>}
         </div>
       </header>
 
       {!user && !loading && (
-        <div className="glass-card p-6 text-center text-white/60">Sign in to generate your tailored astrology insights.</div>
+        <div className="glass-card p-6 text-center text-white/60">登录后即可生成量身定制的星座洞察。</div>
       )}
 
       {user && !report && (
-        <div className="glass-card p-6 text-center text-white/60">Preparing your celestial data…</div>
+        <div className="glass-card p-6 text-center text-white/60">正在整理你的星象数据…</div>
       )}
 
       {message && <div className="glass-card p-4 text-center text-aurora">{message}</div>}
