@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
 const reportCards = [
@@ -11,13 +12,21 @@ const reportCards = [
   {
     title: 'Current zodiac outlook',
     subtitle: 'This year at a glance',
-    description: 'See which elements are in focus, who your allies are, and how to balance the year&apos;s rhythm.',
+    description: 'See which elements are in focus, who your allies are, and how to balance the year\'s rhythm.',
     to: '/reports/zodiac',
   },
 ]
 
 export default function DashboardPage() {
-  const { user } = useAuth()
+  const navigate = useNavigate()
+  const { user, loading } = useAuth()
+
+  useEffect(() => {
+    if (!loading && !user) {
+      navigate('/login', { replace: true })
+    }
+  }, [loading, navigate, user])
+
   return (
     <div className="mx-auto max-w-5xl space-y-12">
       <header className="space-y-3">
@@ -55,4 +64,3 @@ export default function DashboardPage() {
     </div>
   )
 }
-

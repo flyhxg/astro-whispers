@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
 type LoginForm = {
@@ -9,9 +9,16 @@ type LoginForm = {
 }
 
 export default function LoginPage() {
-  const { login } = useAuth()
+  const navigate = useNavigate()
+  const { login, user, loading } = useAuth()
   const { register, handleSubmit, formState } = useForm<LoginForm>()
   const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (!loading && user) {
+      navigate('/dashboard', { replace: true })
+    }
+  }, [loading, navigate, user])
 
   const onSubmit = async (data: LoginForm) => {
     setError(null)
