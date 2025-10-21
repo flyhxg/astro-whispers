@@ -10,12 +10,15 @@ const reportCards = [
     to: '/reports/astrology',
   },
   {
+    title: '星座能量解读库',
+    subtitle: '12星座主题档案',
+    description: '随时查看星座关键字、仪式建议与更新记录，方便你在内容创作或咨询中引用。',
+    to: '/zodiac-insights',
+  },
+  {
     title: '本年度生肖趋势',
     subtitle: '一眼掌握流年',
     description: '了解今年聚焦的五行能量、关键贵人以及如何拿捏前进与休息的节奏。',
-    title: 'Current zodiac outlook',
-    subtitle: 'This year at a glance',
-    description: 'See which elements are in focus, who your allies are, and how to balance the year\'s rhythm.',
     to: '/reports/zodiac',
   },
 ]
