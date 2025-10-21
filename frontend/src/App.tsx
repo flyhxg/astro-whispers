@@ -8,6 +8,7 @@ import AstrologyReportPage from './pages/AstrologyReport'
 import ZodiacReportPage from './pages/ZodiacReport'
 import ArticlesPage from './pages/Articles'
 import ArticleDetailPage from './pages/ArticleDetail'
+import ZodiacInsightsPage from './pages/ZodiacInsights'
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/reports/astrology" element={<AstrologyReportPage />} />
         <Route path="/reports/zodiac" element={<ZodiacReportPage />} />
+        <Route path="/zodiac-insights" element={<ZodiacInsightsPage />} />
         <Route path="/articles" element={<ArticlesPage />} />
         <Route path="/articles/:slug" element={<ArticleDetailPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />

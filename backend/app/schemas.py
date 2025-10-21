@@ -104,3 +104,35 @@ class ArticleResponse(ArticleBase):
     class Config:
         from_attributes = True
 
+
+class ZodiacInterpretationBase(BaseModel):
+    title: str
+    date_range: str
+    element: str
+    modality: str
+    keywords: List[str]
+    summary: str
+    love: str
+    career: str
+    wellbeing: str
+    ritual: str
+    mantra: str
+    lucky_color: str
+
+
+class ZodiacInterpretationCreate(ZodiacInterpretationBase):
+    sign: str
+
+
+class ZodiacInterpretationUpdate(ZodiacInterpretationBase):
+    pass
+
+
+class ZodiacInterpretationResponse(ZodiacInterpretationBase):
+    id: int
+    sign: str
+    updated_at: datetime
+
+    class Config:
+        from_attributes = True
+

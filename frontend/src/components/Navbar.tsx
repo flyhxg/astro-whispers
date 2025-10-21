@@ -9,6 +9,7 @@ const links = [
   { name: '首页', to: '/' },
   { name: '我的仪表盘', to: '/dashboard' },
   { name: '星座报告', to: '/reports/astrology' },
+  { name: '星座解读', to: '/zodiac-insights' },
   { name: '生肖命理', to: '/reports/zodiac' },
   { name: '玄学文章', to: '/articles' }
 ]

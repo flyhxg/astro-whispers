@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { SparklesIcon, GlobeAsiaAustraliaIcon, BookOpenIcon } from '@heroicons/react/24/outline'
+import { SparklesIcon, GlobeAsiaAustraliaIcon, BookOpenIcon, StarIcon } from '@heroicons/react/24/outline'
 
 const highlights = [
   {
@@ -7,6 +7,12 @@ const highlights = [
     description: '从出生时刻解读你的性格原型、人生任务与细分领域运势，结构化呈现每一寸星光。',
     icon: SparklesIcon,
     to: '/reports/astrology'
+  },
+  {
+    title: '星座能量解读库',
+    description: '12星座的年度主题、关键字与仪式建议，随时读取并同步更新。',
+    icon: StarIcon,
+    to: '/zodiac-insights'
   },
   {
     title: '生肖命理洞察',
@@ -55,7 +61,7 @@ export default function HomePage() {
       </section>
 
       <section className="section-padding">
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {highlights.map((item) => (
             <Link key={item.title} to={item.to} className="group glass-card flex flex-col gap-4 p-6 transition hover:border-white/30 hover:shadow-glow">
               <item.icon className="h-10 w-10 text-aurora" />
