@@ -46,7 +46,6 @@ export default function DashboardPage() {
             to={card.to}
             className="glass-card group flex flex-col gap-3 p-6 transition hover:-translate-y-1 hover:border-white/20 hover:shadow-glow"
           >
-            <p className="text-xs uppercase tracking-[0.4em] text-aurora/80">报告</p>
             <h3 className="font-serif text-2xl text-white">{card.title}</h3>
             <p className="text-xs text-white/50">{card.subtitle}</p>
             <p className="text-sm text-white/70">{card.description}</p>
